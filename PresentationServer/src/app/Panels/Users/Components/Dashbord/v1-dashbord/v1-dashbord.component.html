@@ -1,0 +1,27 @@
+<div class="container-fluid"  style="background-color: #ffeee6;">   
+
+    <div class="row">
+        <div class="col-lg-12" style="background-color:#f5e4dc;">
+        </div>        
+    </div> 
+
+    <div class="w-25 p-2"></div>
+
+    <div class="row">
+        <div class="col-lg-12" style="background-color:#ffeee6;">
+
+            <div class="card" *ngFor="let consumableDetails of receivedConsumablesDetails">
+                <div class="card-body" *ngIf="flag" >
+                    <h3 class="card-title"> {{consumableDetails.Consumable_Name}}</h3>                
+                    <h6>Hotel name: {{consumableDetails.Hotel_Name}}</h6>
+                    <p class="card-text">Site offering {{consumableDetails.Consumable_Name}} is {{consumableDetails.Website_Name}} </p>
+                    <p class="card-text">Price is {{consumableDetails.Consumables_Price | currency: "INR"}}</p>
+                    <h6 class="card-title">Is veg: {{consumableDetails.Is_Veg}}</h6>
+                </div>                      
+            </div>
+       
+        </div>      
+    </div>
+    <div class="w-25 p-2"></div>
+
+</div>
