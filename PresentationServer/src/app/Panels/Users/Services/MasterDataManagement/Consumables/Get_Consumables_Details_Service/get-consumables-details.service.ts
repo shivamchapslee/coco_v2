@@ -23,7 +23,7 @@ export class GetConsumablesDetailsService {
     .pipe(map(
       (data: V1ReceivedConsumables[]) =>
       {
-        this.consumableDetails = data["data"];
+        this.consumableDetails = data["data"]; 
         return data;
       }
     ))

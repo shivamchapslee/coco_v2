@@ -5,13 +5,13 @@
     </button>
     <div class="collapse navbar-collapse" id="mynav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item" style="text-align: center;">
           <a class="nav-link text-dark font-weight-bold border border-dark" *ngIf="loginService.currentUserName == null" href="#">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark font-weight-bold" *ngIf="loginService.currentUserName == null" routerLink="login">Log in <i class="fa fa-sign-in"></i></a> 
         </li>       
-        <li class="nav-item">
+        <li class="nav-item" style="text-align: center;">
           <a class="nav-link text-dark font-weight-bold border border-dark fa fa-user-o" *ngIf="loginService.currentUserName != null"> {{loginService.currentUserName}} </a>
         </li>
         <li class="nav-item">

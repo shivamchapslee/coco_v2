@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { V1FilterSearchComponent } from './Panels/Comman/Components/Main/Header/v1-filter-search/v1-filter-search.component';
 import { V1FooterComponent } from './Panels/Comman/Components/Main/Footer/v1-footer/v1-footer.component';
+import { V1RoughComponent } from './Panels/Users/Components/v1-rough/v1-rough.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -23,7 +25,8 @@ import { V1FooterComponent } from './Panels/Comman/Components/Main/Footer/v1-foo
     V1LoginComponent,
     V1MenuBarComponent,
     V1FilterSearchComponent,
-    V1FooterComponent
+    V1FooterComponent,
+    V1RoughComponent
     ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { V1FooterComponent } from './Panels/Comman/Components/Main/Footer/v1-foo
     MaterialModule,
     ReactiveFormsModule  
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

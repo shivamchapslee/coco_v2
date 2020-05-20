@@ -3,10 +3,9 @@
     <div class="row">
         <div class="col-lg-12" style="background-color:#f5e4dc;">
             <form [formGroup]="filerSearch" (ngSubmit)="consumableSearch($event)"> 
-                <!-- {{location.value | json}} -->
                 <div class="" style="background-color: #f5e4dc;">                      
                     <div class="modal-body department-outer"> 
-                        <div class="row"><!--row 1-->
+                        <div class="row">
 
                             <div class="col-sm-5">
                                 <div class="form-group input-group" >  
@@ -22,20 +21,12 @@
                                 </div>
                             </div>
                             <div class="col-sm-5">
-                                <!-- <div class="form-group input-group" >
-
-                                    <input type="search" class="form-control" placeholder="Search food here!" formControlName="Consumables" required (keyup) = "consumableSearch($event)" 
-                                
-                                    name="Consumables" autofocus="autofocus">
-                                    <div class ="text-danger" *ngIf="f.Consumables.errors && valid"></div> 
-                                    
-                                </div> -->
                                 <div class="form-group input-group" >
 
                                     <input type="search" class="form-control" placeholder="Search food here!" formControlName="Consumables" required  (keyup) = "consumableSearch($event)" 
-                                    matInput [matAutocomplete] = "auto" name="Consumables" autofocus="autofocus" [formControl]="myControl">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">  
-                                        <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option.Consumable_Name"> <!-- | async-->
+                                    [matAutocomplete] = "auto" name="Consumables" autofocus="autofocus" >
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">  
+                                        <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option.Consumable_Name"> 
                                             {{option.Consumable_Name}}
                                         </mat-option>
                                     </mat-autocomplete>                                    
@@ -59,21 +50,24 @@
                 </div>
             </form>
 
-            <!-- <form>
-                <mat-form-field> 
-                    <input type="text" matInput [matAutocomplete] = "auto" [formControl]="myControl"  />
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">  
-                        <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option"> | async
-                            {{option.Consumable_Name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <button id="button-addon1" type="submit" class="btn btn-list" style="background-color:  #be8a62;" (click)="ngOnInit()">Search food</button>                                
-                </mat-form-field> 
-            </form> -->
-
         </div>        
     </div>
 
-    <app-v1-dashbord #dashbord></app-v1-dashbord>
-
 </div>
+
+
+<!-- <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="autov1">
+      <mat-autocomplete #autov1="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+</form> -->

@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { V1SubDistrictReceived } from 'src/app/Panels/Users/Models/MasterDataManagement/Geography/Sub_Districts/Received_Data_Model/v1-sub-district-received.model';
-import { HttpClient } from '@angular/common/http';
 import { V1SubDistrictsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Geography/Sub_Districts/v1-sub-districts.service';
 import { NotificationsService } from 'src/app/Panels/Comman/Services/Notification_Services/notifications.service';
 import { GetConsumablesDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Get_Consumables_Details_Service/get-consumables-details.service';
@@ -9,6 +8,9 @@ import { V1ReceivedConsumables } from 'src/app/Panels/Users/Models/MasterDataMan
 import { V1DeliverableConsumables } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Deliverable_Consumables/v1-deliverable-consumables.model';
 import { V1SubDistrictDeliverable } from 'src/app/Panels/Users/Models/MasterDataManagement/Geography/Sub_Districts/Deliverable_Data_Model/v1-sub-district-deliverable.model';
 import { V1DashbordComponent } from 'src/app/Panels/Users/Components/Dashbord/v1-dashbord/v1-dashbord.component';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-v1-filter-search',
@@ -22,8 +24,8 @@ export class V1FilterSearchComponent implements OnInit {
   public filerSearch = new FormGroup
   (
     {
-      City: new FormControl(null, Validators.required),
-      Consumables: new FormControl(null, Validators.required)
+      City          :   new FormControl(null, Validators.required),
+      Consumables   :   new FormControl(null, Validators.required)
     }
   );
 
@@ -34,15 +36,31 @@ export class V1FilterSearchComponent implements OnInit {
   public visible: boolean = false;
   autoSuggestionDetails: V1ReceivedConsumables[];
   public valid: boolean =  false;
+  public resultArray: any;
 
-  constructor( private _getLocation: V1SubDistrictsService,
+  constructor( private _getLocation: V1SubDistrictsService, private cookieService: CookieService,
     private _notification: NotificationsService, private getConsumableDetailsService: GetConsumablesDetailsService) { }
 
   ngOnInit(): void {
+
     this.getLocations();
+
+    if( this.cookieService.get('Location') != null)
+    {
+      let location = this.cookieService.get('Location');
+      this.filerSearch.patchValue({City: location})
+    }
   }
 
   get f() { return this.filerSearch.controls; }
+
+  myControl = new FormControl();
+  
+  displayFn(subject)
+  { return subject ? subject : undefined }
+
+
+
 
   getLocations()
   {
@@ -52,9 +70,10 @@ export class V1FilterSearchComponent implements OnInit {
       {        
         this._notification.responseHandler(response); 
         if(response["response"] == 1)
-        {                                          
+        {  
+
             this.locationList = response["data"]; 
-            //console.log(response["data"]);       
+            //console.log("Location",response["data"]);       
         }
       }
     )
@@ -62,15 +81,20 @@ export class V1FilterSearchComponent implements OnInit {
 
   consumableSearch($event)
   {    
-  
+    //console.log("search vlaue", this.filerSearch.value.Consumables)
     if (this.filerSearch.valid) 
     {
-      //console.log(this.searchConsumableModel);
+      this.cookieService.set('Location', this.filerSearch.value.City);
+      //console.log("cokkie value", this.cookieService.get('Location'));
+
+      // if(i){this.dashbord.flag  =  true;}
+      
       this.searchConsumableModel.Location             =   this.filerSearch.value.City;
       this.searchConsumableModel.Consumable_Name      =   this.filerSearch.value.Consumables;
       this.searchConsumableModel.Select_By            =   "all";
       this.searchConsumableModel.Select_Param         =   "null";
       this.visible = true      
+      //console.log("inputs for search",this.searchConsumableModel);
       this.getConsumableDetailsService.getConsumablesDetails(this.searchConsumableModel)
       .subscribe(
         (response: V1ReceivedConsumables[]) => 
@@ -82,7 +106,6 @@ export class V1FilterSearchComponent implements OnInit {
             {       
             this.dashbord.flag = true;   
             this.receivedConsumablesDetails = response["data"];
-            console.log(response);
             }
             else
             {
