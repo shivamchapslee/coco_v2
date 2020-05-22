@@ -45,7 +45,7 @@ export class V1FilterSearchComponent implements OnInit {
 
     this.getLocations();
 
-    if( this.cookieService.get('Location') != null)
+    if( this.cookieService.get('Location') != null && this.cookieService.get('Location') != '-1')
     {
       let location = this.cookieService.get('Location');
       this.filerSearch.patchValue({City: location})
@@ -59,7 +59,8 @@ export class V1FilterSearchComponent implements OnInit {
   displayFn(subject)
   { return subject ? subject : undefined }
 
-
+  private deleteCookie()
+  {this.cookieService.set('Location', '-1');}
 
 
   getLocations()
@@ -85,10 +86,7 @@ export class V1FilterSearchComponent implements OnInit {
     if (this.filerSearch.valid) 
     {
       this.cookieService.set('Location', this.filerSearch.value.City);
-      //console.log("cokkie value", this.cookieService.get('Location'));
-
-      // if(i){this.dashbord.flag  =  true;}
-      
+                
       this.searchConsumableModel.Location             =   this.filerSearch.value.City;
       this.searchConsumableModel.Consumable_Name      =   this.filerSearch.value.Consumables;
       this.searchConsumableModel.Select_By            =   "all";
@@ -125,4 +123,5 @@ export class V1FilterSearchComponent implements OnInit {
       this.dashbord.flag  =  false;  
     }
   }
+
 }

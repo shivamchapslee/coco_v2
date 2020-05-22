@@ -12,7 +12,7 @@
                                 <div class="form-group input-group" >  
                                     
                                     <select id="sub_District_Loc" class="form-control" name="sub_District_Loc" formControlName="City" required>                             
-                                        <option value="null" hidden >Select your city</option>  
+                                        <option value="null" hidden>Select your city</option>  
                                         <option *ngFor="let location of locationList" value="{{location.Sub_District_Code}}" >{{location.Sub_District_Name}}</option>                                      
                                     </select>     
                                     <div class ="text-danger" *ngIf="f.City.errors && valid">Selecting city is mandatory</div>                                 
@@ -33,7 +33,7 @@
                                 <div class="form-group input-group" >
 
                                     <input type="search" class="form-control" placeholder="Search food here!" formControlName="Consumables" required  (keyup) = "consumableSearch($event)" 
-                                    matInput [matAutocomplete] = "auto" name="Consumables" autofocus="autofocus" [formControl]="myControl">
+                                    [matAutocomplete] = "auto" name="Consumables" autofocus="autofocus" [formControl]="myControl">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">  
                                         <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option.Consumable_Name"> <!-- | async-->
                                             {{option.Consumable_Name}}
@@ -51,25 +51,13 @@
                                     <button id="button-addon1" type="submit" class="btn btn-list" style="background-color:  #be8a62;" (click)="consumableSearch($event)">Search food</button>                                
                                     </div>                                    
                                 </div>
-                            </div>
+                            </div> 
 
 
                         </div>
                     </div>
                 </div>
             </form>
-
-            <!-- <form>
-                <mat-form-field> 
-                    <input type="text" matInput [matAutocomplete] = "auto" [formControl]="myControl"  />
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">  
-                        <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option"> | async
-                            {{option.Consumable_Name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <button id="button-addon1" type="submit" class="btn btn-list" style="background-color:  #be8a62;" (click)="ngOnInit()">Search food</button>                                
-                </mat-form-field> 
-            </form> -->
 
         </div>        
     </div>
