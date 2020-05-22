@@ -34,7 +34,7 @@
 
                                     <input type="search" class="form-control" placeholder="Search food here!" formControlName="Consumables" required  (keyup) = "consumableSearch($event)" 
                                     [matAutocomplete] = "auto" name="Consumables" autofocus="autofocus" [formControl]="myControl">
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">  
+                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">  
                                         <mat-option *ngFor="let option of receivedConsumablesDetails" [value] = "option.Consumable_Name"> <!-- | async-->
                                             {{option.Consumable_Name}}
                                         </mat-option>
