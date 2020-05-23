@@ -1,1 +1,30 @@
-<p>v1-consumable-card works!</p>
+<div class="mat-elevation-z4" *ngFor="let consumableDetails of obs | async">
+    <mat-card>
+        <mat-card>
+            <mat-card-title>
+                {{consumableDetails.Consumable_Name}}
+          </mat-card-title>
+        </mat-card>  
+        <mat-card>
+            <mat-card-title>
+                {{consumableDetails.Consumable_Name}}
+          </mat-card-title>
+        </mat-card>  
+    </mat-card>    
+</div> 
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
+
+  <!-- <div class="col-md-8" style="background-color: blue;"> -->
+    <!-- <mat-card-title>
+        {{consumableDetails.Consumable_Name}}
+  </mat-card-title>
+  <mat-card-subtitle>
+  
+  </mat-card-subtitle>
+  <mat-card-content>
+  
+  </mat-card-content> -->
+<!-- </div> -->
+<!-- <div class="col-md-8" style="background-color: black;"> -->
+<!-- </div> -->
