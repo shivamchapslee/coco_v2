@@ -6,7 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card'
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+
 const MaterialComponents =[
   MatAutocompleteModule,
   MatToolbarModule,
@@ -15,7 +18,9 @@ const MaterialComponents =[
   MatTableModule,
   MatCardModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule  
+  MatProgressSpinnerModule,
+  MatListModule,
+  MatDividerModule  
 ]
 
 @NgModule({
