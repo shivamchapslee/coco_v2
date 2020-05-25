@@ -45,7 +45,7 @@ export class V1FilterSearchComponent implements OnInit {
 
     this.getLocations();
 
-    if( this.cookieService.get('Location') != null && this.cookieService.get('Location') != '-1')
+    if( this.cookieService.get('Location') != "" && this.cookieService.get('Location') != '-1')
     {
       let location = this.cookieService.get('Location');
       this.filerSearch.patchValue({City: location})
