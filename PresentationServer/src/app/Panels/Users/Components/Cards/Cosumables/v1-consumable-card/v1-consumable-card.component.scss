@@ -1,41 +1,54 @@
-body {
-  margin: 0;
+* {
   padding: 0;
+  margin: 0;
 }
 
-.mat-elevation-z4 {
-  margin: 10px 10px 10px 10px;
-  background-color: #f5f5f5;
-  padding-right: 0px;
-  display: inline-flex;
-  //flex-direction: column;
-}
+// .mat-elevation-z4 {
+//   margin: 10px 10px 10px 10px;
+//   background-color: #f5f5f5;
+//   padding-right: 0px;
+//  // display: inline-flex;  
+//   // flex-direction: column;
+// }
 
 .box{
   padding: 5px;
 }
 
-// .container
-// {
-//   border: 6px solid black;
-//   display: inline-flex;
-//   flex-flow: row wrap;
-//   justify-content: space-evenly;
-// }
+.container {
+  display: flex;
+  border: 6px solid black;
+  //first property works as flex direction and second as flex wrap
+  flex-flow: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
 
-// .flex-item {
-//   color: white;
-//    font-size: 1.5rem;
-//    padding: 1rem;
-//    text-align: center;
-//    flex-wrap: wrap;
-// }
+.flex {
+  display: flex;
+  // flex-flow: row wrap;
+  padding-bottom:1rem;
+  // flex-grow: 1;
+  // flex-basis: 50%;
+  //border: 6px solid blue;
+}
 
-// .item-1{
-//   background-color: yellowgreen;
-// }
+.subTitle {
+  padding-top: 5%;
+}
 
-// .item-2{
-//   background-color: blue;
-// }
+.prices{
+  display: flex;
+  // flex-flow: wrap;
+  justify-content: space-between;;
+}
 
+.nav-item{
+  padding-right: 1rem;
+}
+
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}

@@ -10,13 +10,17 @@ import { Observable } from 'rxjs';
   templateUrl: './v1-consumable-card.component.html',
   styleUrls: ['./v1-consumable-card.component.scss']
 })
-export class V1ConsumableCardComponent implements OnInit {
+export class V1ConsumableCardComponent implements OnInit { 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   receivedConsumablesDetails: V1ReceivedConsumables[];
   public visible: boolean = false;
   obs: Observable<any>;
   dataSource: MatTableDataSource<V1ReceivedConsumables>
+  public Sortvisible: boolean = false;
+  public websiteSort: boolean = false;
+  public priceSort: boolean = true;
+  public hotelSort: boolean = false;
 
   constructor(public getConsumableDetailsService: GetConsumablesDetailsService, private changeDetectorRef: ChangeDetectorRef ) { }
 
@@ -32,6 +36,26 @@ export class V1ConsumableCardComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
+  }
+
+  toggleSotingList(j)
+  {
+    console.log(j);
+    if(j==1)
+    {
+      this.priceSort = true;
+      this.hotelSort = false;
+      this.hotelSort = false;
+    }
+    else if(j == 2)
+    {
+      
+    }
+  }
+
+  listView()
+  {
+    this.Sortvisible = !this.Sortvisible;
   }
 
 }

@@ -8,47 +8,147 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
 
 
-<div class="mat-elevation-z4" *ngFor="let consumableDetails of obs | async">  
+
+<!-- <div class="container"> -->
+  <!-- <div class="mat-elevation-z4" *ngFor="let consumableDetails of obs | async">  
     <mat-card>      
         <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
         <mat-divider></mat-divider>
         <mat-list>
           <mat-list-item>
-            <mat-card-content>Sites offering are {{consumableDetails.Hotel_Name}}</mat-card-content>
+            <mat-card-content>Hotels offering are {{consumableDetails.Hotel_Name}}</mat-card-content>
           </mat-list-item>
 
           <mat-divider></mat-divider>
 
           <mat-list-item>
-            <mat-card-content>Hotels offering are {{consumableDetails.Website_Name}}</mat-card-content>
+            <mat-card-content>Sites offering are {{consumableDetails.Website_Name}}</mat-card-content>
           </mat-list-item>
       </mat-list>
     </mat-card>  
 
     <mat-card>
-      <!-- <mat-list>
-        <mat-list-item> -->
           <mat-card-subtitle class="box border">
             Our lowest price {{consumableDetails.Consumables_Price | currency: "INR"}}
           </mat-card-subtitle>
-        <!-- </mat-list-item>            
-        <mat-list-item> -->
-          <mat-card-content>
-            
+          <mat-card-content class="box border">
+            <mat-card-actions>
+              <button class="btn btn-success" mat-flat-button>Veiw Deal</button>
+            </mat-card-actions>
           </mat-card-content>
-        <!-- </mat-list-item>
-    </mat-list> -->
     </mat-card>    
-</div> 
+  </div> 
 <button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
 
 
-  <!-- <div class="container">
-  <div class="flex-item item-1">
 
+
+
+<div class="container mat-elevation-z4">
+  <div class="flex flex-item " *ngFor="let consumableDetails of obs | async">
+    <mat-card>      
+      <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item>
+          <mat-card-content>Hotels offering are {{consumableDetails.Hotel_Name}}</mat-card-content>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item>
+          <mat-card-content>Sites offering are {{consumableDetails.Website_Name}}</mat-card-content>
+        </mat-list-item>
+    </mat-list>
+  </mat-card>  
+
+  <mat-card>
+    <mat-card-subtitle class="box border">
+      Our lowest price {{consumableDetails.Consumables_Price | currency: "INR"}}
+    </mat-card-subtitle>
+    <mat-card-content class="box border">
+      <mat-card-actions>
+        <button class="btn btn-success" mat-flat-button>Veiw Deal</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>    
   </div>
-  <div class="flex-item item-2">
-    
+</div>
+<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
+<mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons></mat-paginator>
+
+
+
+
+<div class="container">
+  <div class="flex flex-item" *ngFor="let consumableDetails of obs | async">
+    <mat-card>
+      <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-subtitle class="subTitle">
+        x sites and y hotels found.
+      </mat-card-subtitle>
+     
+    <div class="prices">
+    <mat-card>
+      <mat-card-subtitle>
+        Min Price<br>
+        <mat-card-subtitle> 
+          {{consumableDetails.Consumables_Price | currency: "INR"}}
+            <mat-card-subtitle>
+              {{consumableDetails.Website_Name}}
+            </mat-card-subtitle>
+          </mat-card-subtitle><br />
+      </mat-card-subtitle>
+    </mat-card>
+    <mat-card>
+      <mat-card-subtitle>
+        Max Price<br>
+        <mat-card-subtitle> 
+          {{consumableDetails.Consumables_Price | currency: "INR"}}
+            <mat-card-subtitle>
+              {{consumableDetails.Website_Name}}
+            </mat-card-subtitle>
+          </mat-card-subtitle><br />
+      </mat-card-subtitle>
+    </mat-card>
   </div>
-</div> -->
+
+      <!-- <div class="selectcContainer">
+      <mat-form-field appearance="fill">
+        <mat-select>
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div> -->
+      <button class="btn btn-success" (click)="listView()" mat-flat-button>Veiw Details</button>
+      <div class="card text-center" *ngIf="Sortvisible" id="myDIV" >
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a *ngIf="priceSort" class="active" href="javascript: void(0);" (click)="toggleSotingList(1)">Price</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript: void(0);" (click)="toggleSotingList(2)">WebSites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript: void(0);" (click)="toggleSotingList(3)">Hotels</a>  
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+    </mat-card>
+  </div>
+</div>
+<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
+<mat-paginator [pageSizeOptions]="[25, 5, 100]" showFirstLastButtons></mat-paginator>
+
+
+<!-- else class=nav-link active -->
