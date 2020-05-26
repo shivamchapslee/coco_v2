@@ -45,7 +45,7 @@
 
 
 
-<div class="container mat-elevation-z4">
+<!-- <div class="container mat-elevation-z4">
   <div class="flex flex-item " *ngFor="let consumableDetails of obs | async">
     <mat-card>      
       <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
@@ -76,14 +76,14 @@
   </div>
 </div>
 <button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
-<mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons></mat-paginator> -->
 
 
 
 
 <div class="container">
-  <div class="flex flex-item" *ngFor="let consumableDetails of obs | async">
-    <mat-card>
+  <div class="flex flex-item" *ngFor="let consumableDetails of obs | async; let i = index">
+    <mat-card class="card">
       <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-subtitle class="subTitle">
@@ -91,7 +91,7 @@
       </mat-card-subtitle>
      
     <div class="prices">
-    <mat-card>
+    <mat-card class="PriceCard">
       <mat-card-subtitle>
         Min Price<br>
         <mat-card-subtitle> 
@@ -102,7 +102,7 @@
           </mat-card-subtitle><br />
       </mat-card-subtitle>
     </mat-card>
-    <mat-card>
+    <mat-card class="PriceCard">
       <mat-card-subtitle>
         Max Price<br>
         <mat-card-subtitle> 
@@ -114,33 +114,34 @@
       </mat-card-subtitle>
     </mat-card>
   </div>
-
-      <!-- <div class="selectcContainer">
-      <mat-form-field appearance="fill">
-        <mat-select>
-          <mat-option value="option">Option</mat-option>
-        </mat-select>
-      </mat-form-field>
-      </div> -->
-      <button class="btn btn-success" (click)="listView()" mat-flat-button>Veiw Details</button>
-      <div class="card text-center" *ngIf="Sortvisible" id="myDIV" >
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a *ngIf="priceSort" class="active" href="javascript: void(0);" (click)="toggleSotingList(1)">Price</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript: void(0);" (click)="toggleSotingList(2)">WebSites</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="javascript: void(0);" (click)="toggleSotingList(3)">Hotels</a>  
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+      <!--card for the hidden content that displays the table with contents-->
+      <div class="accordion" id="accordion1">
+        <div class="card">
+          <div class="card-header bg-secondary" [id]="'card' + i">
+            <h2 class="mb-o">
+              <button class="btn btn-link text-white" type="button" data-toggle="collapse" [attr.data-target]=" '#cardbody' + i">View Details</button>
+            </h2>
+          </div>
+          <div [id]="'cardbody' + i" class="collapse" data-parent="#accordion1">
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Price</th>
+                    <th>Hotel Name</th>
+                    <th>Website Name</th>
+                    <th>View Deal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td>{{consumableDetails.Consumables_Price | currency: "INR"}}</td>
+                  <td>{{consumableDetails.Hotel_Name}}</td>
+                  <td>{{consumableDetails.Website_Name}}</td>
+                  <td><button class="btn btn-primary">Visit Site</button></td>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -149,6 +150,3 @@
 </div>
 <button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
 <mat-paginator [pageSizeOptions]="[25, 5, 100]" showFirstLastButtons></mat-paginator>
-
-
-<!-- else class=nav-link active -->

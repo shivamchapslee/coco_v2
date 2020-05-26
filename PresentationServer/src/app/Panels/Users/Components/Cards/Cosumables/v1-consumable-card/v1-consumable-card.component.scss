@@ -3,34 +3,25 @@
   margin: 0;
 }
 
-// .mat-elevation-z4 {
-//   margin: 10px 10px 10px 10px;
-//   background-color: #f5f5f5;
-//   padding-right: 0px;
-//  // display: inline-flex;  
-//   // flex-direction: column;
-// }
-
 .box{
   padding: 5px;
 }
 
 .container {
   display: flex;
-  border: 6px solid black;
+  //border: 6px solid black;
   //first property works as flex direction and second as flex wrap
   flex-flow: wrap;
   justify-content: space-between;
   align-items: baseline;
+  //width: 1000rem;
 }
 
 .flex {
   display: flex;
-  // flex-flow: row wrap;
   padding-bottom:1rem;
-  // flex-grow: 1;
-  // flex-basis: 50%;
   //border: 6px solid blue;
+  width: 30rem;
 }
 
 .subTitle {
@@ -40,7 +31,8 @@
 .prices{
   display: flex;
   // flex-flow: wrap;
-  justify-content: space-between;;
+  justify-content: space-evenly;;
+  padding-bottom: 1rem;
 }
 
 .nav-item{
@@ -51,4 +43,13 @@ a:link {
   color: black;
   background-color: transparent;
   text-decoration: none;
+}
+
+.card {
+  width: 100%;
+}
+
+.PriceCard {
+  height: 5rem;
+  background-color: rgb(141, 223, 141);
 }
