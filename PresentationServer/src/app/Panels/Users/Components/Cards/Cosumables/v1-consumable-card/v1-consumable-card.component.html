@@ -137,7 +137,7 @@
                   <td>{{consumableDetails.Consumables_Price | currency: "INR"}}</td>
                   <td>{{consumableDetails.Hotel_Name}}</td>
                   <td>{{consumableDetails.Website_Name}}</td>
-                  <td><button class="btn btn-primary">Visit Site</button></td>
+                  <td><button class="btn btn-primary" (click)="goToLink()"><a> Visit Site</a></button></td>
                 </tbody>
               </table>
             </div>

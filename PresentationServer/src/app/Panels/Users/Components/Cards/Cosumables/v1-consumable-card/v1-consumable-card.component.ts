@@ -17,20 +17,19 @@ export class V1ConsumableCardComponent implements OnInit {
   public visible: boolean = false;
   obs: Observable<any>;
   dataSource: MatTableDataSource<V1ReceivedConsumables>
-  // public Sortvisible: boolean = false;
-  // public websiteSort: boolean = false;
-  // public priceSort: boolean = true;
-  // public hotelSort: boolean = false;
+  public siteURL;
 
   constructor(public getConsumableDetailsService: GetConsumablesDetailsService, private changeDetectorRef: ChangeDetectorRef ) { }
 
   ngOnInit(): void {
+    //console.log(this.receivedConsumablesDetails);
   }
 
   getConsumables()
   {
     this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
-    //console.log("card data", this.receivedConsumablesDetails);
+    //console.log("card data", this.receivedConsumablesDetails[0]["Consumable_URL"]);
+    this.siteURL = this.receivedConsumablesDetails[0]["Consumable_URL"];
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -38,24 +37,9 @@ export class V1ConsumableCardComponent implements OnInit {
     this.obs = this.dataSource.connect();
   }
 
-  // toggleSotingList(j)
-  // {
-  //   console.log(j);
-  //   if(j==1)
-  //   {
-  //     this.priceSort = true;
-  //     this.hotelSort = false;
-  //     this.hotelSort = false;
-  //   }
-  //   else if(j == 2)
-  //   {
-      
-  //   }
-  // }
-
-  // listView()
-  // {
-  //   this.Sortvisible = !this.Sortvisible;
-  // }
+  goToLink()
+  {
+    window.open(this.siteURL);
+  }
 
 }
