@@ -15,13 +15,12 @@
     <Folder Include="Controllers\Admin\ProcessManagement\" />
     <Folder Include="Controllers\Auth\Admin\NewFolder\" />
     <Folder Include="Controllers\Security\AntiForgery\" />
-    <Folder Include="Controllers\Users\ConsumableSelection\ActionSubmittion\" />
+    <Folder Include="Controllers\Users\ConsumableSelection\AutoCompleteSearchResult\v1\" />
     <Folder Include="Middlewares\AntiXSS\" />
     <Folder Include="Middlewares\HeaderValidation\" />
     <Folder Include="Models\Admin\ProcessManagement\" />
     <Folder Include="Models\Auth\Admin\" />
     <Folder Include="Models\Security\AntiForgery\" />
-    <Folder Include="Models\Users\ConsumableSelection\" />
     <Folder Include="Resources\v1\" />
     <Folder Include="Services\Communication\" />
     <Folder Include="Services\Encryption\" />

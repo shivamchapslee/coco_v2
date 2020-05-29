@@ -11,13 +11,14 @@ import { V1DashbordComponent } from 'src/app/Panels/Users/Components/Dashbord/v1
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Details/v1-card-details.service';
 
 @Component({
   selector: 'app-v1-filter-search',
   templateUrl: './v1-filter-search.component.html',
   styleUrls: ['./v1-filter-search.component.scss']
 })
-export class V1FilterSearchComponent implements OnInit {
+export class V1FilterSearchComponent implements OnInit { 
 
   @ViewChild("dashbord") dashbord: V1DashbordComponent;
 
@@ -38,7 +39,7 @@ export class V1FilterSearchComponent implements OnInit {
   public valid: boolean =  false;
   public resultArray: any;
 
-  constructor( private _getLocation: V1SubDistrictsService, private cookieService: CookieService,
+  constructor( private _getLocation: V1SubDistrictsService, private cookieService: CookieService, private cardDetails: V1CardDetailsService,
     private _notification: NotificationsService, private getConsumableDetailsService: GetConsumablesDetailsService) { }
 
   ngOnInit(): void {
@@ -94,6 +95,50 @@ export class V1FilterSearchComponent implements OnInit {
       this.visible = true      
       //console.log("inputs for search",this.searchConsumableModel);
       this.getConsumableDetailsService.getConsumablesDetails(this.searchConsumableModel)
+      .subscribe(
+        (response: V1ReceivedConsumables[]) => 
+        {
+          this._notification.responseHandler(response); 
+          if(response["response"] == 1)
+          { 
+            if(response["data"][0]["RESPONSE"] == 1)
+            {       
+            this.dashbord.flag = true;   
+            this.receivedConsumablesDetails = response["data"];
+            }
+            else
+            {
+              console.log("INVALID SEARCH TERM");            
+              this.dashbord.flag = false; 
+            } 
+          }
+        }
+      )
+      // console.log("called from parent to child");
+      this.dashbord.getConsumables();
+    }
+    else
+    {
+      this._notification.info("Please enter all required fields")
+      this.valid =  true; 
+      this.dashbord.flag  =  false;  
+    }
+  }
+
+  consumableCardDetails($event)
+  {    
+    //console.log("search vlaue", this.filerSearch.value.Consumables)
+    if (this.filerSearch.valid) 
+    {
+      this.cookieService.set('Location', this.filerSearch.value.City);
+                
+      this.searchConsumableModel.Location             =   this.filerSearch.value.City;
+      this.searchConsumableModel.Consumable_Name      =   this.filerSearch.value.Consumables;
+      this.searchConsumableModel.Select_By            =   "all";
+      this.searchConsumableModel.Select_Param         =   "null";
+      this.visible = true      
+      console.log("inputs for search",this.searchConsumableModel);
+      this.cardDetails.getCardDetails(this.searchConsumableModel)
       .subscribe(
         (response: V1ReceivedConsumables[]) => 
         {

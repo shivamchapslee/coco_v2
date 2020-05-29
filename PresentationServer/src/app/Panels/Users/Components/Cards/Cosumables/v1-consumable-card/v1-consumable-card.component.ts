@@ -4,6 +4,8 @@ import { V1ReceivedConsumables } from 'src/app/Panels/Users/Models/MasterDataMan
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
+import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Details/v1-card-details.service';
+import { V1ReceivedCardConsumable } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Received_Card_Consumables/v1-received-card-consumable.model';
 
 @Component({
   selector: 'app-v1-consumable-card',
@@ -13,23 +15,24 @@ import { Observable } from 'rxjs';
 export class V1ConsumableCardComponent implements OnInit { 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  receivedConsumablesDetails: V1ReceivedConsumables[];
+  //receivedConsumablesDetails: V1ReceivedConsumables[];
+  receivedConsumablesDetails: V1ReceivedCardConsumable[];
   public visible: boolean = false;
   obs: Observable<any>;
-  dataSource: MatTableDataSource<V1ReceivedConsumables>
-  public siteURL;
+  //dataSource: MatTableDataSource<V1ReceivedConsumables>
+  dataSource: MatTableDataSource<V1ReceivedCardConsumable>
 
-  constructor(public getConsumableDetailsService: GetConsumablesDetailsService, private changeDetectorRef: ChangeDetectorRef ) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
 
   ngOnInit(): void {
     //console.log(this.receivedConsumablesDetails);
   }
 
-  getConsumables()
+  getConsumables() 
   {
-    this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
-    //console.log("card data", this.receivedConsumablesDetails[0]["Consumable_URL"]);
-    this.siteURL = this.receivedConsumablesDetails[0]["Consumable_URL"];
+    console.log("get consumables called");
+    this.receivedConsumablesDetails = this._cardsDetails.cardDetails;
+    console.log("card data", this.receivedConsumablesDetails); 
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -37,9 +40,24 @@ export class V1ConsumableCardComponent implements OnInit {
     this.obs = this.dataSource.connect();
   }
 
-  goToLink()
+  //   getConsumables()
+  // {
+  //   this.receivedConsumablesDetails = this.getConsumableDetailsService.getConsumablesDetails; 
+  //   console.log("card data", this.receivedConsumablesDetails); 
+  //   this.visible = true;
+  //   this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
+  //   this.changeDetectorRef.detectChanges();
+  //   this.dataSource.paginator = this.paginator;
+  //   this.obs = this.dataSource.connect();
+  // }
+
+  goToLink(site)
   {
-    window.open(this.siteURL);
+    console.log("site url: ",site);
+    window.open(site);
   }
 
 }
+
+
+

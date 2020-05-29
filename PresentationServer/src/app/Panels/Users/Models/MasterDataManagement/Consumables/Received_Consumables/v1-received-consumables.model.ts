@@ -16,5 +16,5 @@ export class V1ReceivedConsumables {
         this.Consumables_Price = null;
         this.Hotel_Name = null;
         this.Website_Name = null;
-    }
+    } 
 }
