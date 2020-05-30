@@ -21,11 +21,14 @@ export class V1ConsumableCardComponent implements OnInit {
   obs: Observable<any>;
   //dataSource: MatTableDataSource<V1ReceivedConsumables>
   dataSource: MatTableDataSource<V1ReceivedCardConsumable>
+  public sameConsumablesList: any[] = [];
+  public indexnumbers: any[] = [];
+  private i = 0;
+  forEach: any;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
 
-  ngOnInit(): void {
-    //console.log(this.receivedConsumablesDetails);
+  ngOnInit(): void {    
   }
 
   getConsumables() 
@@ -33,6 +36,7 @@ export class V1ConsumableCardComponent implements OnInit {
     console.log("get consumables called");
     this.receivedConsumablesDetails = this._cardsDetails.cardDetails;
     console.log("card data", this.receivedConsumablesDetails); 
+    //let cardVariable = this.receivedConsumablesDetails[0]["RESPONSE"];
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -49,11 +53,27 @@ export class V1ConsumableCardComponent implements OnInit {
   //   this.changeDetectorRef.detectChanges();
   //   this.dataSource.paginator = this.paginator;
   //   this.obs = this.dataSource.connect();
-  // }
+  // } 
+
+  sameConsumableList(id)
+  {
+    for(let list of this.receivedConsumablesDetails)
+    {
+      if(id == list.Consumables_ID)
+      {        
+         let copy = Object.assign({},this.receivedConsumablesDetails);
+        var values = Object.keys(copy).map(function(it){
+          return copy[it]
+        })      
+        this.indexnumbers = values;
+        console.log("coppied object: ",this.indexnumbers);
+      }      
+    }
+  }
 
   goToLink(site)
   {
-    console.log("site url: ",site);
+    //console.log("site url: ",site);
     window.open(site);
   }
 
