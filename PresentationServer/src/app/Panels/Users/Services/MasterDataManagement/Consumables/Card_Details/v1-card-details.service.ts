@@ -19,12 +19,12 @@ export class V1CardDetailsService {
 
     getCardDetails(searchConsumableModel: V1DeliverableConsumables): Observable<V1ReceivedCardConsumable[]>
     {
-      console.log("inside card service: ", searchConsumableModel)
+      //console.log("inside card service: ", searchConsumableModel)
       return this.http.post<V1ReceivedCardConsumable[]>(this._getConsumablesDetails.getCardDetails,searchConsumableModel,{responseType: "json"})
       .pipe(map(
         (data: V1ReceivedCardConsumable[]) =>
         {
-          console.log("inside service: ",data); 
+          //console.log("inside service: ",data); 
           this.cardDetails = data["data"];
           return data; 
         }

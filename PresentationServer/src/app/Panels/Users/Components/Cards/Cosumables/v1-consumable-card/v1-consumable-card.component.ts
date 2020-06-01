@@ -6,6 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Details/v1-card-details.service';
 import { V1ReceivedCardConsumable } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Received_Card_Consumables/v1-received-card-consumable.model';
+import { map } from 'rxjs/operators';
+import { V1DeliverableConsumables } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Deliverable_Consumables/v1-deliverable-consumables.model';
+import { NotificationsService } from 'src/app/Panels/Comman/Services/Notification_Services/notifications.service';
+
 
 @Component({
   selector: 'app-v1-consumable-card',
@@ -15,28 +19,25 @@ import { V1ReceivedCardConsumable } from 'src/app/Panels/Users/Models/MasterData
 export class V1ConsumableCardComponent implements OnInit { 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  //receivedConsumablesDetails: V1ReceivedConsumables[];
-  receivedConsumablesDetails: V1ReceivedCardConsumable[];
+  receivedConsumablesDetails: V1ReceivedConsumables[];
+  receivedCardDetails: V1ReceivedCardConsumable[];
   public visible: boolean = false;
   obs: Observable<any>;
-  //dataSource: MatTableDataSource<V1ReceivedConsumables>
-  dataSource: MatTableDataSource<V1ReceivedCardConsumable>
-  public sameConsumablesList: any[] = [];
+  dataSource: MatTableDataSource<V1ReceivedConsumables>
   public indexnumbers: any[] = [];
-  private i = 0;
-  forEach: any;
+  public viewCard: boolean = false;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,
+    public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
 
   ngOnInit(): void {    
   }
 
   getConsumables() 
-  {
-    console.log("get consumables called");
-    this.receivedConsumablesDetails = this._cardsDetails.cardDetails;
-    console.log("card data", this.receivedConsumablesDetails); 
-    //let cardVariable = this.receivedConsumablesDetails[0]["RESPONSE"];
+  {    
+    this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
+    this.receivedCardDetails = this._cardsDetails.cardDetails;
+    //console.log("card data", this.receivedCardDetails);
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -44,29 +45,22 @@ export class V1ConsumableCardComponent implements OnInit {
     this.obs = this.dataSource.connect();
   }
 
-  //   getConsumables()
-  // {
-  //   this.receivedConsumablesDetails = this.getConsumableDetailsService.getConsumablesDetails; 
-  //   console.log("card data", this.receivedConsumablesDetails); 
-  //   this.visible = true;
-  //   this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
-  //   this.changeDetectorRef.detectChanges();
-  //   this.dataSource.paginator = this.paginator;
-  //   this.obs = this.dataSource.connect();
-  // } 
-
   sameConsumableList(id)
-  {
-    for(let list of this.receivedConsumablesDetails)
+  {    
+    // console.log("card id", id);//return; 
+    for(let list of this.receivedCardDetails)
     {
       if(id == list.Consumables_ID)
       {        
-         let copy = Object.assign({},this.receivedConsumablesDetails);
-        var values = Object.keys(copy).map(function(it){
-          return copy[it]
-        })      
+        let copy = Object.assign({},this.receivedCardDetails);
+        //console.log("copy object", copy);
+        var values = Object.keys(copy).map(function(it)
+        {
+         return copy[it]          
+        })     
+        //console.log("value array", values); 
         this.indexnumbers = values;
-        console.log("coppied object: ",this.indexnumbers);
+        //console.log("coppied object: ",this.indexnumbers);
       }      
     }
   }

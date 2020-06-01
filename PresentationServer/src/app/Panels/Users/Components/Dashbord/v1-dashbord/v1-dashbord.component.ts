@@ -29,7 +29,7 @@ export class V1DashbordComponent implements OnInit {
   getLocationModel: V1SubDistrictDeliverable = new V1SubDistrictDeliverable();
   public visible: boolean = false;
   autoSuggestionDetails: V1ReceivedConsumables[];
-  public flag: boolean = true;  
+  public flag: boolean = true;   
 
   ngOnInit(): void {  
   }

@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Details/v1-card-details.service';
+import { V1ConsumableCardComponent } from 'src/app/Panels/Users/Components/Cards/Cosumables/v1-consumable-card/v1-consumable-card.component';
 
 @Component({
   selector: 'app-v1-filter-search',
@@ -20,7 +21,8 @@ import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataMa
 })
 export class V1FilterSearchComponent implements OnInit { 
 
-  @ViewChild("dashbord") dashbord: V1DashbordComponent;
+  //@ViewChild("dashbord") dashbord: V1DashbordComponent;
+  @ViewChild("card") card: V1ConsumableCardComponent;
 
   public filerSearch = new FormGroup
   (
@@ -103,25 +105,25 @@ export class V1FilterSearchComponent implements OnInit {
           { 
             if(response["data"][0]["RESPONSE"] == 1)
             {       
-            this.dashbord.flag = true;   
+            //this.dashbord.flag = true;   
             this.receivedConsumablesDetails = response["data"];
             }
             else
             {
               console.log("INVALID SEARCH TERM");            
-              this.dashbord.flag = false; 
+              //this.dashbord.flag = false; 
             } 
           }
         }
       )
       // console.log("called from parent to child");
-      this.dashbord.getConsumables();
+      //this.dashbord.getConsumables();
     }
     else
     {
       this._notification.info("Please enter all required fields")
       this.valid =  true; 
-      this.dashbord.flag  =  false;  
+      //this.dashbord.flag  =  false;  
     }
   }
 
@@ -147,25 +149,30 @@ export class V1FilterSearchComponent implements OnInit {
           { 
             if(response["data"][0]["RESPONSE"] == 1)
             {       
-            this.dashbord.flag = true;   
+            //this.dashbord.flag = true;   
             this.receivedConsumablesDetails = response["data"];
             }
             else
             {
               console.log("INVALID SEARCH TERM");            
-              this.dashbord.flag = false; 
+              //this.dashbord.flag = false;
+              this.card.viewCard = false;
+              alert("NO MATCHING ITEM FOUND"); 
             } 
           }
         }
       )
       // console.log("called from parent to child");
-      this.dashbord.getConsumables();
+     // this.dashbord.getConsumables();
+     this.card.getConsumables();
+     this.card.viewCard = true;
     }
     else
     {
       this._notification.info("Please enter all required fields")
       this.valid =  true; 
-      this.dashbord.flag  =  false;  
+      //this.dashbord.flag  =  false;  
+      this.card.viewCard = false;
     }
   }
 
