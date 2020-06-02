@@ -4,6 +4,7 @@ import { V1DashbordComponent } from './Panels/Users/Components/Dashbord/v1-dashb
 import { V1LoginComponent } from './Panels/Users/Components/Login/v1-login/v1-login.component';
 import { V1FilterSearchComponent } from './Panels/Comman/Components/Main/Header/v1-filter-search/v1-filter-search.component';
 import { V1RoughComponent } from './Panels/Users/Components/v1-rough/v1-rough.component';
+import { V1SignUpComponent } from './Panels/Comman/Components/SignUp/v1-sign-up/v1-sign-up.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: "rough", 
     component: V1RoughComponent  
+  },
+  {
+    path: "formSubmittion", 
+    component: V1SignUpComponent  
   },
 ];
 

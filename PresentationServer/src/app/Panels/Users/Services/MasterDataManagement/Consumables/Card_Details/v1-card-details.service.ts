@@ -23,7 +23,7 @@ export class V1CardDetailsService {
       return this.http.post<V1ReceivedCardConsumable[]>(this._getConsumablesDetails.getCardDetails,searchConsumableModel,{responseType: "json"})
       .pipe(map(
         (data: V1ReceivedCardConsumable[]) =>
-        {
+        { 
           //console.log("inside service: ",data); 
           this.cardDetails = data["data"];
           return data; 

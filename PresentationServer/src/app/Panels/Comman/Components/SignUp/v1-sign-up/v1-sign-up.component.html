@@ -1,1 +1,112 @@
-<p>v1-sign-up works!</p>
+    <div class="container">
+        <!-- <div class="row"> -->
+        <form [formGroup]="insertUserDetails" (ngSubmit)="onSubmitClick()" class="form">
+            <div class="modal-content">                      
+                <div class="modal-body department-outer">
+                    
+                    <div class="row"><!--row 1-->
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>First Name</label>
+                                    <input type="text" name="firstName" id="firstName" placeholder="Enter your name" class="form-control" formControlName="firstName" required>                                
+                                    <div class ="text-danger" *ngIf="f.firstName.errors && valid">This Field is required</div>
+                                </div>
+                            </div>    
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>Last Name</label>
+                                    <input type="text" name="lastName" id="lastName" placeholder="Enter last name" class="form-control" formControlName="lastName" required>                                
+                                    <div class ="text-danger" *ngIf="f.lastName.errors && valid">This Field is required</div>
+                                </div>
+                            </div>                                       
+
+                        </div>
+                    </div>
+                    
+
+                    <div class="row"><!--row 2-->
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>Email</label>
+                                    <input type="text" name="email" id="email" placeholder="Enter email" class="form-control" formControlName="email" required>                                
+                                    <div class ="text-danger" *ngIf="f.email.errors && valid">This Field is required</div>
+                                </div>
+                            </div>    
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>Phone Number</label>
+                                    <input type="number" name="phone" id="phone" placeholder="Enter phone number" class="form-control" formControlName="phone" required>                                
+                                    <div class ="text-danger" *ngIf="f.phone.errors && valid">This Field is required</div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row"><!--row 2-->
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>Gender</label>
+                                    <input type="text" name="gender" id="gender" placeholder="Enter gender" class="form-control" formControlName="gender" required>                                
+                                    <div class ="text-danger" *ngIf="f.gender.errors && valid">This Field is required</div>
+                                </div>
+                            </div>   
+                            
+                            <!-- <div  class="row">
+                                <div class="col-xs-5">
+                                    <label>Is Active</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-check" >
+                                        <input id="gender" class="form-check-input" type="radio"  name="gender" [value]="true" formControlName="gender" required>
+                                        <label class="form-check-label">Yes</label>
+                                    </div>
+                                </div> 
+                                <div class="col-xs-4"> 
+                                    <div class="form-check" >
+                                        <input id="gender" class="form-check-input" type="radio"  name="gender" [value]="false" formControlName="gender" required>
+                                        <label class="form-check-label">No</label>
+                                    </div>
+                                </div> 
+                            </div> -->
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>User Name</label>
+                                    <input type="text" name="userName" id="userName" placeholder="Enter user name" class="form-control" formControlName="userName" required>                                
+                                    <div class ="text-danger" *ngIf="f.userName.errors && valid">This Field is required</div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <div class="row"><!--row 2-->
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-5">
+                                <div class="form-group">                                        
+                                    <label>Password</label>
+                                    <input type="password" name="Password" id="Password" placeholder="Enter office name" class="form-control" formControlName="Password" required>                                
+                                    <div class ="text-danger" *ngIf="f.Password.errors && valid">This Field is required</div>
+                                </div>
+                            </div>    
+
+                        </div>
+                    </div>
+
+                    <button type="button" class="bg bg-primary" (click)="onSubmitClick()">Submit</button>
+
+                </div>
+            </div> 
+        </form>
+    <!-- </div> -->
+    </div>
+
+   

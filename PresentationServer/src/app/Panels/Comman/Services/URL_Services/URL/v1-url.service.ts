@@ -14,4 +14,5 @@ export class V1UrlService {
   getConsumablesDetails   :   string  =   this._config.cocoapi + "api/mdm/foodSelect/v2/get-consumables";
   getSubDistricts         :   string  =   this._config.cocoapi + "api/mdm/geo/subDistricts/v1/get-sub-districts";
   getCardDetails          :   string  =   this._config.cocoapi + "api/cs/actionsubmittion/v1/get-cardDetails";
+  insertUserDetails       :   string  =   this._config.cocoapi + "api/common/SignUpSubmittion/v1/insert-userDetails";
 } 
