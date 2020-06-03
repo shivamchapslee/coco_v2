@@ -7,6 +7,7 @@ namespace foodComparisonServer.Models.Common.SignUpSubmittion.v1
 {
     public class SignUpModel
     {
+        
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
         public string EMAIL_Address { get; set; }

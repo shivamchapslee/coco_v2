@@ -26,6 +26,10 @@ export class V1ConsumableCardComponent implements OnInit {
   dataSource: MatTableDataSource<V1ReceivedConsumables>
   public indexnumbers: any[] = [];
   public viewCard: boolean = false;
+  //for rendering veg and non veg images accordingly.
+  public True: any = "True";
+  public False: any = "False";
+  public wishListSelect: boolean = false;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,
     public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
@@ -37,7 +41,7 @@ export class V1ConsumableCardComponent implements OnInit {
   {    
     this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
     this.receivedCardDetails = this._cardsDetails.cardDetails;
-    //console.log("card data", this.receivedCardDetails);
+    //console.log("card data", this.receivedConsumablesDetails);
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -45,30 +49,36 @@ export class V1ConsumableCardComponent implements OnInit {
     this.obs = this.dataSource.connect();
   }
 
+  //renders all food items to the table to compare consumables. Has problems(renders all data insted of specific ones because receivedCardDetails is added to copy variable) in it that are solved inside HTML code of table. 
   sameConsumableList(id)
   {    
     // console.log("card id", id);//return; 
     for(let list of this.receivedCardDetails)
     {
       if(id == list.Consumables_ID)
-      {        
+      { 
+        //adding specific objects from array to a variable.       
         let copy = Object.assign({},this.receivedCardDetails);
-        //console.log("copy object", copy);
+        //converting objects to array
         var values = Object.keys(copy).map(function(it)
         {
          return copy[it]          
         })     
-        //console.log("value array", values); 
         this.indexnumbers = values;
-        //console.log("coppied object: ",this.indexnumbers);
       }      
     }
   }
 
+  //Takes user to the specific site that is ordering specific food.
   goToLink(site)
   {
     //console.log("site url: ",site);
     window.open(site);
+  }
+
+  WishiListAction()
+  {
+    this.wishListSelect = !this.wishListSelect;
   }
 
 }

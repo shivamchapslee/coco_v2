@@ -12,7 +12,7 @@ export class V1ReceivedConsumables {
         this.Response = 0;
         this.Location_Sub_District_ID = 0;
         this.Consumable_Name = null;
-        this.Is_Veg = null
+        this.Is_Veg = true;
         this.Consumables_Price = null;
         this.Hotel_Name = null;
         this.Website_Name = null;
