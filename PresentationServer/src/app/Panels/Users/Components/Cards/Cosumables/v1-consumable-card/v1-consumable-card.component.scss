@@ -13,14 +13,14 @@
   //first property works as flex direction and second as flex wrap
   flex-flow: wrap;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: baseline; 
   //width: 1000rem;
 }
 
 .flex {
   display: flex;
   padding-bottom:1rem;
-  //border: 6px solid blue;
+  //not responsive due to fixd width
   width: 30rem;
 }
 
@@ -50,6 +50,25 @@ a:link {
 }
 
 .PriceCard {
-  height: 5rem;
+  height:   5rem;
   background-color: rgb(141, 223, 141);
+}
+
+//for header of cards
+.inner{
+  display: flex;
+  //flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.Name{
+  width: fit-content;    
+  height: 0%; 
+}
+
+.Cart{
+  width: fit-content;
+  padding-bottom: 0em;  
+  //justify-content: space-between;
+  height: 0%; 
 }

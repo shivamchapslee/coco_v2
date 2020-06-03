@@ -16,6 +16,7 @@ import { V1FooterComponent } from './Panels/Comman/Components/Main/Footer/v1-foo
 import { V1RoughComponent } from './Panels/Users/Components/v1-rough/v1-rough.component';
 import { CookieService } from 'ngx-cookie-service';
 import { V1ConsumableCardComponent } from './Panels/Users/Components/Cards/Cosumables/v1-consumable-card/v1-consumable-card.component';
+import { V1SignUpComponent } from './Panels/Comman/Components/SignUp/v1-sign-up/v1-sign-up.component';
 
 
 
@@ -28,7 +29,8 @@ import { V1ConsumableCardComponent } from './Panels/Users/Components/Cards/Cosum
     V1FilterSearchComponent,
     V1FooterComponent,
     V1RoughComponent,
-    V1ConsumableCardComponent
+    V1ConsumableCardComponent,
+    V1SignUpComponent
     ],
   imports: [
     BrowserModule,

@@ -1,92 +1,57 @@
+<div class="w-25 p-2"></div>
 
-  <!-- <div class="mat-elevation-z4" *ngFor="let consumableDetails of obs | async">
-      <mat-card>
-
-      </mat-card>    
-  </div> 
-  <button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
-
-
-
-<!-- <div class="container"> -->
-  <!-- <div class="mat-elevation-z4" *ngFor="let consumableDetails of obs | async">  
-    <mat-card>      
-        <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
-        <mat-divider></mat-divider>
-        <mat-list>
-          <mat-list-item>
-            <mat-card-content>Hotels offering are {{consumableDetails.Hotel_Name}}</mat-card-content>
-          </mat-list-item>
-
-          <mat-divider></mat-divider>
-
-          <mat-list-item>
-            <mat-card-content>Sites offering are {{consumableDetails.Website_Name}}</mat-card-content>
-          </mat-list-item>
-      </mat-list>
-    </mat-card>  
-
-    <mat-card>
-          <mat-card-subtitle class="box border">
-            Our lowest price {{consumableDetails.Consumables_Price | currency: "INR"}}
-          </mat-card-subtitle>
-          <mat-card-content class="box border">
-            <mat-card-actions>
-              <button class="btn btn-success" mat-flat-button>Veiw Deal</button>
-            </mat-card-actions>
-          </mat-card-content>
-    </mat-card>    
-  </div> 
-<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
-
-
-
-
-
-<!-- <div class="container mat-elevation-z4">
-  <div class="flex flex-item " *ngFor="let consumableDetails of obs | async">
-    <mat-card>      
-      <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
-      <mat-divider></mat-divider>
-      <mat-list>
-        <mat-list-item>
-          <mat-card-content>Hotels offering are {{consumableDetails.Hotel_Name}}</mat-card-content>
-        </mat-list-item>
-
-        <mat-divider></mat-divider>
-
-        <mat-list-item>
-          <mat-card-content>Sites offering are {{consumableDetails.Website_Name}}</mat-card-content>
-        </mat-list-item>
-    </mat-list>
-  </mat-card>  
-
-  <mat-card>
-    <mat-card-subtitle class="box border">
-      Our lowest price {{consumableDetails.Consumables_Price | currency: "INR"}}
-    </mat-card-subtitle>
-    <mat-card-content class="box border">
-      <mat-card-actions>
-        <button class="btn btn-success" mat-flat-button>Veiw Deal</button>
-      </mat-card-actions>
-    </mat-card-content>
-  </mat-card>    
-  </div>
-</div>
-<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
-<mat-paginator [pageSizeOptions]="[25, 100]" showFirstLastButtons></mat-paginator> -->
-
-
-
-
+<div *ngIf="viewCard">
 <div class="container">
   <div class="flex flex-item" *ngFor="let consumableDetails of obs | async; let i = index">
-    <mat-card class="card">
-      <mat-card-title>{{consumableDetails.Consumable_Name}}</mat-card-title>
+    <mat-card class="card mat-elevation-z4">
+      <div class="flex-container inner">
+        <mat-card-title  class="flex flex-item Name"><!--name of consumables and symbol-->
+
+          <!--veg symbol-->          
+          <img class="veg_nVeg_IMG" *ngIf="consumableDetails.Is_Veg == True" src="https://img.icons8.com/color/24/000000/vegetarian-food-symbol.png"/> 
+          <!--non-  veg symbol-->
+          <svg class="veg_nVeg_IMG" *ngIf="consumableDetails.Is_Veg == False" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            width="24" height="24"viewBox="0 0 226 226"style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" 
+            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" 
+            style="mix-blend-mode: normal"><path d="M0,226v-226h226v226z" fill="none"></path><g fill="#e74c3c">
+            <path d="M37.66667,18.83333c-10.29301,0 -18.83333,8.54033 -18.83333,18.83333v150.66667c0,10.29301 8.54033,18.83333 18.83333,18.83333h150.53792c10.37864,0 18.97195,
+              -8.70969 18.83333,-19.09082v-0.01839l-2.09668,-150.64827v-0.01839c-0.14892,-10.18235 -8.64413,-18.55745 -18.83333,-18.55745zM37.66667,37.66667h148.44124l2.09668,
+              150.66667h-150.53792zM112.92644,65.91667c-12.48728,0 -24.46311,4.96055 -33.29295,13.79039c-8.82984,8.82984 -13.79039,20.80567 -13.79039,33.29295c0,12.48728 4.96055,
+              24.46311 13.79039,33.29295c8.82984,8.82984 20.80567,13.79039 33.29295,13.79039c26.00341,0 47.08333,-21.07993 47.08333,-47.08333c0,-26.00341 -21.07993,-47.08333 -47.08333,-47.08333z">
+            </path></g></g></svg> 
+          <span id="ConName">{{consumableDetails.Consumable_Name}}</span>          
+        </mat-card-title>
+        
+        <a class="flex flex-item Cart" (click)="WishiListAction()"><!--image for wishlists-->
+          <!--Broken heart image-->
+          <svg class="HeartIMG" *ngIf="!wishListSelect"  
+            xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+              font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#cccccc">
+              <path d="M157.66667,60.91667c0,28.165 -30.24333,55.39833 -41.71,65.64667l-1.14667,1.075c-10.24833,9.245 -24.15167,21.14167 -24.15167,21.14167l-4.65833,4.01333l-4.65833,
+                -4.01333c0,0 -13.90333,-11.89667 -24.15167,-21.14167l-1.14667,-1.075c-11.46667,-10.24833 -41.71,-37.48167 -41.71,-65.64667c0,-22.50333 16.91333,-39.41667 39.41667,
+                -39.41667c8.385,0 15.83833,2.86667 21.78667,6.52167l-18.20333,43.645h28.66667l-7.16667,35.83333l35.83333,-50.16667h-28.66667l13.25833,-30.88833c5.44667,-2.86667 11.825,
+                -4.945 18.99167,-4.945c22.50333,0 39.41667,16.91333 39.41667,39.41667z">
+              </path></g>
+            </g>
+          </svg>
+        
+          <!--red heart image-->
+          <svg class="HeartIMG" *ngIf="wishListSelect" 
+            xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" 
+            font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none">            
+            </path><g fill="#e74c3c"><path d="M118.25,21.5c-20.7475,0 -32.25,14.97833 -32.25,14.97833c0,0 -11.5025,-14.97833 -32.25,-14.97833c-21.77233,0 -39.41667,17.64433 -39.41667,
+              39.41667c0,29.89217 35.20267,58.85983 45.01383,68.01167c11.30183,10.535 26.65283,24.08 26.65283,24.08c0,0 15.351,-13.545 26.65283,-24.08c9.81117,-9.15183 45.01383,
+              -38.1195 45.01383,-68.01167c0,-21.77233 -17.64433,-39.41667 -39.41667,-39.41667z">
+            </path></g></g>
+          </svg>
+        </a>        
+        
+      </div>
       <mat-divider></mat-divider>
-      <mat-card-subtitle class="subTitle">
+      <mat-card-subtitle class="subTitle" style="text-align: center;">
         x sites and y hotels found.
       </mat-card-subtitle>
      
@@ -119,7 +84,10 @@
         <div class="card">
           <div class="card-header bg-secondary" [id]="'card' + i">
             <h2 class="mb-o">
-              <button class="btn btn-link text-white" type="button" data-toggle="collapse" [attr.data-target]=" '#cardbody' + i">View Details</button>
+              <button (click)="sameConsumableList(consumableDetails.Consumables_ID)" 
+                class="btn btn-link text-white" type="button" data-toggle="collapse" [attr.data-target]=" '#cardbody' + i">
+                View Details
+              </button>
             </h2>
           </div>
           <div [id]="'cardbody' + i" class="collapse" data-parent="#accordion1">
@@ -128,25 +96,25 @@
                 <thead>
                   <tr>
                     <th>Price</th>
-                    <th>Hotel Name</th>
-                    <th>Website Name</th>
-                    <th>View Deal</th>
+                    <th>Hotel</th>
+                    <th>Website</th>
+                    <th>Visit</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <td>{{consumableDetails.Consumables_Price | currency: "INR"}}</td>
-                  <td>{{consumableDetails.Hotel_Name}}</td>
-                  <td>{{consumableDetails.Website_Name}}</td>
-                  <td><button class="btn btn-primary">Visit Site</button></td>
+                <tbody *ngFor="let items of indexnumbers">
+                  <td *ngIf="consumableDetails.Consumables_ID == items.Consumables_ID">{{items.Consumables_Price | currency: "INR"}}</td>
+                  <td *ngIf="consumableDetails.Consumables_ID == items.Consumables_ID">{{items.Hotel_Name}}</td>
+                  <td *ngIf="consumableDetails.Consumables_ID == items.Consumables_ID">{{items.Website_Name}}</td>
+                  <td *ngIf="consumableDetails.Consumables_ID == items.Consumables_ID"><button class="btn btn-primary" (click)="goToLink(items.Consumable_URL)"><a>Site</a></button></td>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
     </mat-card>
   </div>
 </div>
-<button class="btn btn-success" (click)="getConsumables()" mat-flat-button>Register</button>
 <mat-paginator [pageSizeOptions]="[25, 5, 100]" showFirstLastButtons></mat-paginator>
+</div>

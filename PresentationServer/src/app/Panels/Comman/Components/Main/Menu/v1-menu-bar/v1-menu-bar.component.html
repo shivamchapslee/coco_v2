@@ -1,18 +1,18 @@
   <nav class="navbar navbar-expand-sm navbar-custom navbar-dark">
     <a class="navbar-brand" href="#"><h4>COCO</h4></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav"> 
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mynav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link text-dark font-weight-bold border border-dark" *ngIf="loginService.currentUserName == null" href="#">Register</a>
+          <a class="nav-link text-dark font-weight-bold border border-dark" routerLink="formSubmittion" *ngIf="loginService.currentUserName == null" href="#">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark font-weight-bold" *ngIf="loginService.currentUserName == null" routerLink="login">Log in <i class="fa fa-sign-in"></i></a> 
         </li>       
         <li class="nav-item" style="text-align: center;">
-          <a class="nav-link text-dark font-weight-bold border border-dark fa fa-user-o" *ngIf="loginService.currentUserName != null"> {{loginService.currentUserName}} </a>
+          <a class="nav-link text-dark font-weight-bold border border-dark fa fa-user-o far fa-heart" *ngIf="loginService.currentUserName != null"> {{loginService.currentUserName}} </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark font-weight-bold" href="#" (click)="loginService.Logout()" *ngIf="loginService.currentUserName != null">Logout  <i class="fa fa-sign-out"></i></a>  
