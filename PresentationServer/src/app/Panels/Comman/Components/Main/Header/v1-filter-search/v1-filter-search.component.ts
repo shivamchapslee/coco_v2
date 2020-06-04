@@ -13,6 +13,7 @@ import { startWith, map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { V1CardDetailsService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Details/v1-card-details.service';
 import { V1ConsumableCardComponent } from 'src/app/Panels/Users/Components/Cards/Cosumables/v1-consumable-card/v1-consumable-card.component';
+import { V1PriceHotelCountService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Price_Hotels_Count/v1-price-hotel-count.service';
 
 @Component({
   selector: 'app-v1-filter-search',
@@ -42,7 +43,7 @@ export class V1FilterSearchComponent implements OnInit {
   public resultArray: any;
 
   constructor( private _getLocation: V1SubDistrictsService, private cookieService: CookieService, private cardDetails: V1CardDetailsService,
-    private _notification: NotificationsService, private getConsumableDetailsService: GetConsumablesDetailsService) { }
+    private _notification: NotificationsService, private getConsumableDetailsService: GetConsumablesDetailsService, public priceHotelCount:V1PriceHotelCountService) { }
 
   ngOnInit(): void {
 
@@ -115,8 +116,8 @@ export class V1FilterSearchComponent implements OnInit {
             } 
           }
         }
-      )
-      // console.log("called from parent to child");
+      )      
+      //console.log("called from parent to child",this.searchConsumableModel);
       //this.dashbord.getConsumables();
     }
     else
@@ -139,7 +140,7 @@ export class V1FilterSearchComponent implements OnInit {
       this.searchConsumableModel.Select_By            =   "all";
       this.searchConsumableModel.Select_Param         =   "null";
       this.visible = true      
-      console.log("inputs for search",this.searchConsumableModel);
+      //console.log("inputs for search",this.searchConsumableModel);
       this.cardDetails.getCardDetails(this.searchConsumableModel)
       .subscribe(
         (response: V1ReceivedConsumables[]) => 

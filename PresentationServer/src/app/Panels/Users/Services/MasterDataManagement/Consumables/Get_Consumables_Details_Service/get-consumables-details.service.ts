@@ -15,7 +15,7 @@ export class GetConsumablesDetailsService {
   public consumableDetails: V1ReceivedConsumables[];
 
   constructor(private http: HttpClient, private _notification: NotificationsService,  
-    private _getConsumablesDetails: V1UrlService) { }
+    private _getConsumablesDetails: V1UrlService) { } 
 
   getConsumablesDetails(searchConsumableModel: V1DeliverableConsumables): Observable<V1ReceivedConsumables[]>  
   {

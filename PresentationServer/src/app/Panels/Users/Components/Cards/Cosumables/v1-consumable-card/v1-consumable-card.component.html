@@ -52,7 +52,7 @@
       </div>
       <mat-divider></mat-divider>
       <mat-card-subtitle class="subTitle" style="text-align: center;">
-        x sites and y hotels found.
+        {{consumableDetails.WebsiteCount}} sites and  {{consumableDetails.HotelsCount}} hotels found.
       </mat-card-subtitle>
      
     <div class="prices">
@@ -60,7 +60,7 @@
       <mat-card-subtitle>
         Min Price<br>
         <mat-card-subtitle> 
-          {{consumableDetails.Consumables_Price | currency: "INR"}}
+          {{consumableDetails.MinPrice | currency: "INR"}}
             <mat-card-subtitle>
               {{consumableDetails.Website_Name}}
             </mat-card-subtitle>
@@ -71,7 +71,7 @@
       <mat-card-subtitle>
         Max Price<br>
         <mat-card-subtitle> 
-          {{consumableDetails.Consumables_Price | currency: "INR"}}
+          {{consumableDetails.MaxPrice | currency: "INR"}}
             <mat-card-subtitle>
               {{consumableDetails.Website_Name}}
             </mat-card-subtitle>

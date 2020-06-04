@@ -9,6 +9,7 @@ import { V1ReceivedCardConsumable } from 'src/app/Panels/Users/Models/MasterData
 import { map } from 'rxjs/operators';
 import { V1DeliverableConsumables } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Deliverable_Consumables/v1-deliverable-consumables.model';
 import { NotificationsService } from 'src/app/Panels/Comman/Services/Notification_Services/notifications.service';
+import { V1PriceHotelCountService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Price_Hotels_Count/v1-price-hotel-count.service';
 
 
 @Component({
@@ -26,22 +27,22 @@ export class V1ConsumableCardComponent implements OnInit {
   dataSource: MatTableDataSource<V1ReceivedConsumables>
   public indexnumbers: any[] = [];
   public viewCard: boolean = false;
+  searchConsumableModel:V1DeliverableConsumables = new V1DeliverableConsumables();
   //for rendering veg and non veg images accordingly.
   public True: any = "True";
   public False: any = "False";
   public wishListSelect: boolean = false;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,
-    public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,public _cardsDetails: V1CardDetailsService,
+     public getConsumableDetailsService: GetConsumablesDetailsService) { }
 
   ngOnInit(): void {    
   }
 
   getConsumables() 
-  {    
+  {   
     this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
     this.receivedCardDetails = this._cardsDetails.cardDetails;
-    //console.log("card data", this.receivedConsumablesDetails);
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
