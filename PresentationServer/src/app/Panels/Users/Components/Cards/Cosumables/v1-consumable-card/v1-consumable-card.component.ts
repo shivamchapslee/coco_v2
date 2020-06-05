@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { V1DeliverableConsumables } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Deliverable_Consumables/v1-deliverable-consumables.model';
 import { NotificationsService } from 'src/app/Panels/Comman/Services/Notification_Services/notifications.service';
 import { V1PriceHotelCountService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Price_Hotels_Count/v1-price-hotel-count.service';
+import { IpServiceService } from 'src/app/Panels/Comman/Services/IpService/ip-service.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { V1PriceHotelCountService } from 'src/app/Panels/Users/Services/MasterDa
 export class V1ConsumableCardComponent implements OnInit { 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  ipAddress:string;
   receivedConsumablesDetails: V1ReceivedConsumables[];
   receivedCardDetails: V1ReceivedCardConsumable[];
   public visible: boolean = false;
@@ -33,10 +35,11 @@ export class V1ConsumableCardComponent implements OnInit {
   public False: any = "False";
   public wishListSelect: boolean = false;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,public _cardsDetails: V1CardDetailsService,
+  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,public _cardsDetails: V1CardDetailsService,private ip:IpServiceService,
      public getConsumableDetailsService: GetConsumablesDetailsService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
+     this.getIP();   
   }
 
   getConsumables() 
@@ -77,10 +80,19 @@ export class V1ConsumableCardComponent implements OnInit {
     window.open(site);
   }
 
-  WishiListAction()
+  WishiListAction(Consumables_ID)
   {
     this.wishListSelect = !this.wishListSelect;
+    console.log(Consumables_ID,this.ipAddress,this.wishListSelect);
+    
   }
+
+  getIP()  
+  {  
+    this.ip.getIPAddress().subscribe((res:any)=>{     
+      this.ipAddress=res.ip;  
+    });  
+  }  
 
 }
 

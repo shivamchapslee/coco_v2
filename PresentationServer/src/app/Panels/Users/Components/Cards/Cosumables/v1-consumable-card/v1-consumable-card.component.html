@@ -23,7 +23,7 @@
           <span id="ConName">{{consumableDetails.Consumable_Name}}</span>          
         </mat-card-title>
         
-        <a class="flex flex-item Cart" (click)="WishiListAction()"><!--image for wishlists-->
+        <a class="flex flex-item Cart" (click)="WishiListAction(consumableDetails.Consumables_ID)"><!--image for wishlists-->
           <!--Broken heart image-->
           <svg class="HeartIMG" *ngIf="!wishListSelect"  
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
@@ -52,7 +52,7 @@
       </div>
       <mat-divider></mat-divider>
       <mat-card-subtitle class="subTitle" style="text-align: center;">
-        {{consumableDetails.WebsiteCount}} sites and  {{consumableDetails.HotelsCount}} hotels found.
+        {{consumableDetails.WebsiteCount}} site(s) and  {{consumableDetails.HotelsCount}} hotel(s) found.
       </mat-card-subtitle>
      
     <div class="prices">
