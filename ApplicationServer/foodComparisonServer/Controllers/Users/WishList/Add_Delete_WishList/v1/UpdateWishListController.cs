@@ -12,13 +12,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using foodComparisonServer.Models.Users.CardDetails.Price_Hotel_Count;
+using foodComparisonServer.Models.Users.WishList.Add_Delete_WishList.v1;
 
-namespace foodComparisonServer.Controllers.Users.CardDetails.Price_Hotel_Count
+namespace foodComparisonServer.Controllers.Users.WishList.Add_Delete_WishList.v1
 {
-    [Route("api/users/cardDetails/v1")]
+    [Route("api/users/updatWishList/v1")]
     [ApiController]
-    public class Price_Hotel_CountController : ControllerBase
+    public class UpdateWishListController : ControllerBase
     {
         #region GLOBAL VARIABLES
         private readonly IHostingEnvironment HostingEnvironment;
@@ -31,7 +31,7 @@ namespace foodComparisonServer.Controllers.Users.CardDetails.Price_Hotel_Count
         #endregion
 
         #region CONSTRUCTOR
-        public Price_Hotel_CountController(IHostingEnvironment _HostingEnvironment, IConfiguration _Configuration, IHttpContextAccessor _HttpContextAccessor)
+        public UpdateWishListController(IHostingEnvironment _HostingEnvironment, IConfiguration _Configuration, IHttpContextAccessor _HttpContextAccessor)
         {
             HostingEnvironment = _HostingEnvironment;
             Configurations = _Configuration;
@@ -43,19 +43,21 @@ namespace foodComparisonServer.Controllers.Users.CardDetails.Price_Hotel_Count
         }
         #endregion
 
-        #region COUNT HOTELS PRICE
+        #region UPDATE WISHLIST
         [HttpPost]
-        [Route("get-price_Hotel_count")]
-        public IActionResult GetFood(Price_Hotel_CountModel InputModel)
+        [Route("update-wishlist")]
+        public IActionResult GetFood(UpdateWishListModel InputModel)
         {
             SqlParameter[] parameters =
             {
-                new SqlParameter("@Location", InputModel.Location),
-                new SqlParameter("@Consumable_Name", InputModel.Consumable_Name),
+                new SqlParameter("@IpAddress", InputModel.IpAddress),
+                new SqlParameter("@Consumable_ID", InputModel.Consumable_ID),
+                new SqlParameter("@User_ID", InputModel.User_ID),
+                new SqlParameter("@Session_ID", InputModel.Session_ID),
                 new SqlParameter("@Select_By", InputModel.Select_By),
                 new SqlParameter("@Select_Param", InputModel.Select_Param)
             };
-            DataTable dtResponse = ObjSqlGateway.bindDataTableParam("App_Count_Price_Hotels", parameters);
+            DataTable dtResponse = ObjSqlGateway.bindDataTableParam("App_WishList_Update", parameters);
 
             if (ObjHelper.CheckDBNullResponse(dtResponse))
             {
