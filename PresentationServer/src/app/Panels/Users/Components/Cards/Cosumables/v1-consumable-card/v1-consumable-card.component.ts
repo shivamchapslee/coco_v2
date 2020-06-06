@@ -9,6 +9,10 @@ import { V1ReceivedCardConsumable } from 'src/app/Panels/Users/Models/MasterData
 import { map } from 'rxjs/operators';
 import { V1DeliverableConsumables } from 'src/app/Panels/Users/Models/MasterDataManagement/Consumables/Deliverable_Consumables/v1-deliverable-consumables.model';
 import { NotificationsService } from 'src/app/Panels/Comman/Services/Notification_Services/notifications.service';
+import { V1PriceHotelCountService } from 'src/app/Panels/Users/Services/MasterDataManagement/Consumables/Card_Price_Hotels_Count/v1-price-hotel-count.service';
+import { IpServiceService } from 'src/app/Panels/Comman/Services/IpService/ip-service.service';
+import { V1WishListUpdateSent } from 'src/app/Panels/Users/Models/MasterDataManagement/WishList/WishListUpdate/WishListUpdateSent/v1-wish-list-update-sent.model';
+import { V1WishlistUpdateService } from 'src/app/Panels/Users/Services/MasterDataManagement/WishList/WishLlistUpdate/v1-wishlist-update.service';
 
 
 @Component({
@@ -19,6 +23,9 @@ import { NotificationsService } from 'src/app/Panels/Comman/Services/Notificatio
 export class V1ConsumableCardComponent implements OnInit { 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  ipAddress:string;
+  status: any;
+  wishListSentData: V1WishListUpdateSent = new V1WishListUpdateSent();
   receivedConsumablesDetails: V1ReceivedConsumables[];
   receivedCardDetails: V1ReceivedCardConsumable[];
   public visible: boolean = false;
@@ -26,22 +33,23 @@ export class V1ConsumableCardComponent implements OnInit {
   dataSource: MatTableDataSource<V1ReceivedConsumables>
   public indexnumbers: any[] = [];
   public viewCard: boolean = false;
+  searchConsumableModel:V1DeliverableConsumables = new V1DeliverableConsumables();
   //for rendering veg and non veg images accordingly.
   public True: any = "True";
   public False: any = "False";
   public wishListSelect: boolean = false;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private _notification: NotificationsService,
-    public _cardsDetails: V1CardDetailsService, public getConsumableDetailsService: GetConsumablesDetailsService ) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef,public _cardsDetails: V1CardDetailsService,private ip:IpServiceService,private _notification: NotificationsService,
+     public getConsumableDetailsService: GetConsumablesDetailsService, public _updateWishLists: V1WishlistUpdateService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
+     this.getIP();   
   }
 
   getConsumables() 
-  {    
+  {   
     this.receivedConsumablesDetails = this.getConsumableDetailsService.consumableDetails; 
     this.receivedCardDetails = this._cardsDetails.cardDetails;
-    //console.log("card data", this.receivedConsumablesDetails);
     this.visible = true;
     this.dataSource = new MatTableDataSource(this.receivedConsumablesDetails);
     this.changeDetectorRef.detectChanges();
@@ -76,10 +84,30 @@ export class V1ConsumableCardComponent implements OnInit {
     window.open(site);
   }
 
-  WishiListAction()
+  WishiListAction(Consumables_ID)
   {
     this.wishListSelect = !this.wishListSelect;
+    //console.log(Consumables_ID,this.ipAddress,this.wishListSelect);
+    this.wishListSentData.Consumable_ID = Consumables_ID,
+    this.wishListSentData.IpAddress = this.ipAddress,
+    this.wishListSentData.Select_By = "null",
+    this.wishListSentData.Select_Param = "null",
+    this.wishListSentData.Session_ID = 2,
+    this.wishListSentData.User_ID = 5
+    //console.log(this.wishListSentData);
+    this._updateWishLists.updateWishListStatus(this.wishListSentData)
+    .subscribe(data => {
+      this._notification.responseHandler(data);  
+      console.log("wishList response",data)
+    })
   }
+
+  getIP()  
+  {  
+    this.ip.getIPAddress().subscribe((res:any)=>{     
+      this.ipAddress=res.ip;  
+    });  
+  }  
 
 }
 

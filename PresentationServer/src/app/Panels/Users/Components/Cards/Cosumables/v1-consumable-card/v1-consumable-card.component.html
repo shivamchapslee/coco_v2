@@ -23,7 +23,7 @@
           <span id="ConName">{{consumableDetails.Consumable_Name}}</span>          
         </mat-card-title>
         
-        <a class="flex flex-item Cart" (click)="WishiListAction()"><!--image for wishlists-->
+        <a class="flex flex-item Cart" (click)="WishiListAction(consumableDetails.Consumables_ID)"><!--image for wishlists-->
           <!--Broken heart image-->
           <svg class="HeartIMG" *ngIf="!wishListSelect"  
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
@@ -52,7 +52,7 @@
       </div>
       <mat-divider></mat-divider>
       <mat-card-subtitle class="subTitle" style="text-align: center;">
-        x sites and y hotels found.
+        {{consumableDetails.WebsiteCount}} site(s) and  {{consumableDetails.HotelsCount}} hotel(s) found.
       </mat-card-subtitle>
      
     <div class="prices">
@@ -60,7 +60,7 @@
       <mat-card-subtitle>
         Min Price<br>
         <mat-card-subtitle> 
-          {{consumableDetails.Consumables_Price | currency: "INR"}}
+          {{consumableDetails.MinPrice | currency: "INR"}}
             <mat-card-subtitle>
               {{consumableDetails.Website_Name}}
             </mat-card-subtitle>
@@ -71,7 +71,7 @@
       <mat-card-subtitle>
         Max Price<br>
         <mat-card-subtitle> 
-          {{consumableDetails.Consumables_Price | currency: "INR"}}
+          {{consumableDetails.MaxPrice | currency: "INR"}}
             <mat-card-subtitle>
               {{consumableDetails.Website_Name}}
             </mat-card-subtitle>
@@ -116,5 +116,5 @@
     </mat-card>
   </div>
 </div>
-<mat-paginator [pageSizeOptions]="[25, 5, 100]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[26, 6, 100]" showFirstLastButtons></mat-paginator>
 </div>

@@ -55,7 +55,7 @@ export class V1LoginComponent implements OnInit {
 
   public onLoginClick(event)
   {
-    this.loginService.Login(this.loginViewModel)
+    this.loginService.Login(this.loginViewModel) 
     .subscribe(
       (response) => 
       {

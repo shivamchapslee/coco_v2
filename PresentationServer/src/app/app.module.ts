@@ -19,7 +19,6 @@ import { V1ConsumableCardComponent } from './Panels/Users/Components/Cards/Cosum
 import { V1SignUpComponent } from './Panels/Comman/Components/SignUp/v1-sign-up/v1-sign-up.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
