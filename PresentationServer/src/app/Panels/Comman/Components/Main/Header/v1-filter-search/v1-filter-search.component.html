@@ -2,8 +2,8 @@
 
     <div class="row">
         <div class="col-lg-12" style="background-color:#f5e4dc;">
+            <!-- search box to find food -->
             <form [formGroup]="filerSearch" (ngSubmit)="consumableSearch($event)"> 
-                <!-- {{location.value | json}} -->
                 <div class="" style="background-color: #f5e4dc;">                      
                     <div class="modal-body department-outer"> 
                         <div class="row"><!--row 1-->
@@ -45,6 +45,8 @@
 
 
                             </div>
+                            
+                            <!-- search button -->
                             <div class="col-sm-2">
                                 <div class="form-group input-group" >                                        
                                     <div class="input-group-append">
@@ -71,6 +73,78 @@
         </div> 
         <div class="col-md-1"></div>
     </div>    
+
+
+    <!-- images to be displayed on initial load of page -->
+    <div class="container" *ngIf="displayHomeImg">
+        <div class="row">
+            <div class="col-sm-4">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Breakfast</mat-card-title>
+                    
+                    </mat-card-header>
+                    <img mat-card-image src="assets\homeImages\appetizer-1386743_1920.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                    <p>
+                        “One should not attend even the end of the world without a good breakfast.”
+                        ― Robert A. Heinlein
+                    </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    <!-- <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button> -->
+                    </mat-card-actions>
+                </mat-card>
+            </div>            
+
+            <div class="col-sm-4">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Lunch</mat-card-title>
+                    
+                    </mat-card-header>
+                    <img mat-card-image src="assets\homeImages\drinks-2578446_1920.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                    <p>
+                        "My favorite exercise is a cross between a lunge and a crunch... I call it lunch."
+                    </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    <!-- <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button> -->
+                    </mat-card-actions>
+                </mat-card>
+            </div>            
+
+            <div class="col-sm-4">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Dinner</mat-card-title>
+                    
+                    </mat-card-header>
+                    <img mat-card-image src="assets\homeImages\pizza-3007395_1920.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content>
+                    <p>
+                        "After a good dinner one can forgive anybody, even one's own relations."  ― Oscar Wilde
+                    </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    <!-- <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button> -->
+                    </mat-card-actions>
+                </mat-card>
+            </div>            
+        </div>    
+
+        <div class="row">
+            Collections
+        </div>
+
+    </div>
 
 </div>
 

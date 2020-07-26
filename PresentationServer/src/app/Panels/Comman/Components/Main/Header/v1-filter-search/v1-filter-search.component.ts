@@ -36,6 +36,7 @@ export class V1FilterSearchComponent implements OnInit {
 
   ipAddress:string;
   receivedConsumablesDetails: V1ReceivedConsumables[];
+  displayHomeImg: boolean = true;
   locationList: V1SubDistrictReceived[];
   searchConsumableModel: V1DeliverableConsumables = new V1DeliverableConsumables();
   getLocationModel: V1SubDistrictDeliverable = new V1SubDistrictDeliverable();
@@ -143,6 +144,10 @@ export class V1FilterSearchComponent implements OnInit {
     //console.log("search vlaue", this.filerSearch.value.Consumables)
     if (this.filerSearch.valid) 
     {
+      if(this.receivedConsumablesDetails)
+      {
+        this.displayHomeImg = false;
+      }
       this.cookieService.set('Location', this.filerSearch.value.City);
                 
       this.searchConsumableModel.Location             =   this.filerSearch.value.City;
@@ -185,6 +190,6 @@ export class V1FilterSearchComponent implements OnInit {
       //this.dashbord.flag  =  false;  
       this.card.viewCard = false;
     }
-  }
+  } 
 
 }
