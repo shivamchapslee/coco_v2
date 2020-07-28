@@ -78,10 +78,10 @@
     <!-- images to be displayed on initial load of page -->
     <div class="container" *ngIf="displayHomeImg">
         <div class="row">
-            <div class="col-sm-4">
-                <mat-card class="example-card">
+            <div class="col-sm-4" style="padding-top: 2%;">
+                <mat-card (click)="consumableCardDetails($event)" class="HomeImg-card">
                     <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
+                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
                     <mat-card-title>Breakfast</mat-card-title>
                     
                     </mat-card-header>
@@ -99,10 +99,10 @@
                 </mat-card>
             </div>            
 
-            <div class="col-sm-4">
-                <mat-card class="example-card">
+            <div class="col-sm-4" style="padding-top: 2%;">
+                <mat-card class="HomeImg-card">
                     <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
+                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
                     <mat-card-title>Lunch</mat-card-title>
                     
                     </mat-card-header>
@@ -119,10 +119,10 @@
                 </mat-card>
             </div>            
 
-            <div class="col-sm-4">
-                <mat-card class="example-card">
+            <div class="col-sm-4" style="padding-top: 2%;">
+                <mat-card class="HomeImg-card">
                     <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
+                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
                     <mat-card-title>Dinner</mat-card-title>
                     
                     </mat-card-header>
@@ -141,7 +141,9 @@
         </div>    
 
         <div class="row">
-            Collections
+            <div class="container" style="padding-top: 2%;">
+                <h3>Collections</h3>
+            </div>
         </div>
 
     </div>
