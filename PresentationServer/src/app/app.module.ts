@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +17,7 @@ import { V1RoughComponent } from './Panels/Users/Components/v1-rough/v1-rough.co
 import { CookieService } from 'ngx-cookie-service';
 import { V1ConsumableCardComponent } from './Panels/Users/Components/Cards/Cosumables/v1-consumable-card/v1-consumable-card.component';
 import { V1SignUpComponent } from './Panels/Comman/Components/SignUp/v1-sign-up/v1-sign-up.component';
-
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -39,8 +39,10 @@ import { V1SignUpComponent } from './Panels/Comman/Components/SignUp/v1-sign-up/
     FormsModule,
     ToastrModule.forRoot(),
     MaterialModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule
+    // MDBBootstrapModule.forRoot() 
   ],
+  // schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
