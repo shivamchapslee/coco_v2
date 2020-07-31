@@ -16,10 +16,10 @@ export class V1SignUpComponent implements OnInit {
   public userData: V1SignUpSubmittion = new V1SignUpSubmittion();   
 
   public insertUserDetails = new FormGroup({
-    firstName       :       new FormControl('',Validators.required),
-    lastName        :       new FormControl('',Validators.required),
+    firstName       :       new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z ]*")]),
+    lastName        :       new FormControl('',[Validators.required, Validators.pattern("[a-zA-Z ]*")]),
     email           :       new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-    phone           :       new FormControl('', [Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    phone           :       new FormControl('',[Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     gender          :       new FormControl('',Validators.required),
     userName        :       new FormControl('',Validators.required),
     Password        :       new FormControl('',[Validators.required, Validators.minLength(6), this.passwordCheck]),  //, MustMatch('Password', 'PasswordCheck')
@@ -29,13 +29,17 @@ export class V1SignUpComponent implements OnInit {
 
   constructor(private _notification: NotificationsService, public signUpResponse:V1SignUpServiceService, private customValidator: PasswordMatchService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    this.insertUserDetails.controls.Password.valueChanges.subscribe(
+      x=>this.insertUserDetails.controls.PasswordCheck.updateValueAndValidity()
+    )
   }
 
   get f() { return this.insertUserDetails.controls; } 
 
   passwordCheck(control)
   {
+    //console.log("inside confirm password",control);
     if(control.value != null)
     {
       var conPass = control.value;
@@ -44,13 +48,18 @@ export class V1SignUpComponent implements OnInit {
       {
         var password = pass.value;
         if(conPass !== "" && password !== "")
-        {
+        { 
+          if(conPass !== password)
+          {
           return {
-            passwordValidity: true
+            passwordValidity: true            
+            }
           }
-        }
-        else
-          return null;
+          else
+          {
+            return null;
+          }
+        }        
       }
     }
   }
@@ -98,26 +107,5 @@ export class V1SignUpComponent implements OnInit {
        this.valid =  true; 
     }
   }
-
-  // export function MustMatch(controlName: string, matchingControlName: string) 
-  // {
-  //   return (formGroup: FormGroup) => 
-  //   {
-  //     const control = formGroup.controls[controlName];
-  //     const matchingControl = formGroup.controls[matchingControlName];
-  //     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-  //       // return if another validator has already found an error on the matchingControl
-  //       return;
-  //     }
-
-  //     // set error on matchingControl if validation fails
-  //     if (control.value !== matchingControl.value) {
-  //         matchingControl.setErrors({ mustMatch: true });
-  //     } else {
-  //         matchingControl.setErrors(null);
-  //     }
-  //   };
-  // }
- 
 
 }
