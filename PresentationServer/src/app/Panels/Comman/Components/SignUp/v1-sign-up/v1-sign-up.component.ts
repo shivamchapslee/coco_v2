@@ -77,8 +77,8 @@ export class V1SignUpComponent implements OnInit {
       this.userData.Password          =     this.insertUserDetails.value.Password;      
       // this.userData.First_Login_Flag  =     this.insertUserDetails.value.firstLoginFlag;
       
-      console.log("userDetails", this.userData);
-       return;   
+      // console.log("userDetails", this.userData);
+      //  return;   
 
       this.signUpResponse.userSubmittion(this.userData)
       .subscribe(
